@@ -11,13 +11,13 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-This project simulates a simple content-based music recommender. Real platforms like Spotify, TikTok, and YouTube combine many signals, including listening history, likes, skips, watch time, playlists, and what similar users enjoyed, to predict what a person might want next. My version keeps the idea small and transparent by focusing on song attributes inside the dataset, then comparing them against a user taste profile to rank songs that best match the user's vibe.
+This project simulates a simple content-based music recommender called `NextPlay`. Real platforms like Spotify, TikTok, and YouTube combine many signals, including listening history, likes, skips, watch time, playlists, and what similar users enjoyed, to predict what a person might want next. My version keeps the idea small and transparent by focusing on song attributes inside the dataset, then comparing them against a user taste profile to rank songs that best match the user's vibe.
 
 ---
 
 ## How The System Works
 
-Real-world recommenders usually mix two big approaches. Collaborative filtering looks at behavior patterns across many users, such as "people who liked this also liked that," while content-based filtering looks directly at the item's attributes, such as genre, mood, energy, tempo, or other audio features. My simulator uses the content-based approach because it is easier to explain: each song is treated like a bundle of features, each user profile stores target preferences, and the recommender calculates a weighted score for every song before sorting the catalog from highest to lowest.
+Real-world recommenders usually mix two big approaches. Collaborative filtering looks at behavior patterns across many users, such as "people who liked this also liked that," while content-based filtering looks directly at the item's attributes, such as genre, mood, energy, tempo, or other audio features. `NextPlay` uses the content-based approach because it is easier to explain: each song is treated like a bundle of features, each user profile stores target preferences, and the recommender calculates a weighted score for every song before sorting the catalog from highest to lowest.
 
 For the simulation design, I expanded the original 10-song catalog to 18 songs so the dataset includes more variety across genres and moods such as EDM, folk, blues, metal, reggaeton, acoustic, and world. I kept the existing numeric features `energy`, `tempo_bpm`, `valence`, `danceability`, and `acousticness` because they capture different parts of a song's vibe. In my experience, energy alone is not enough to describe musical feel, so keeping valence and acousticness in the dataset gives the recommender room to distinguish between something intense, playful, peaceful, or dreamy even if two songs have similar tempo.
 
@@ -134,11 +134,26 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Experiments You Tried
 
-Planned experiments for later phases:
+Completed evaluation work:
 
-- Reduce the genre weight to see whether mood and energy create more diverse recommendations.
-- Compare a chill lofi profile against an intense rock profile and check whether the rankings clearly separate.
-- Test whether acousticness helps distinguish cozy tracks from high-energy synthetic tracks.
+- Tested `High-Energy Pop`, `Chill Lofi`, `Deep Intense Rock`, and one adversarial profile called `Sad but Energetic`.
+- Verified that `Sunrise City` ranked first for high-energy pop, `Library Rain` ranked first for chill lofi, and `Storm Runner` ranked first for deep intense rock.
+- Ran a weight-shift experiment where the genre weight was cut in half and the energy weight was doubled.
+- Observed that this experiment moved `Rooftop Lights` above `Gym Hero` for the pop profile, which made the system more energy-sensitive but less loyal to the user's favorite genre.
+
+## CLI Output Screenshot
+
+This screenshot shows the terminal output for the current CLI-first recommender run, including the ranked songs, scores, and explanation reasons.
+
+![CLI recommender output](Screenshot%202026-04-12%20at%2023.13.07.png)
+
+## Testing Profile Screenshots
+
+These screenshots show the Phase 4 evaluation runs for different recommendation profiles.
+
+![Testing profile output 1](testingProfiles.png)
+
+![Testing profile output 2](testingProfiles1.png)
 
 ---
 
@@ -153,8 +168,8 @@ This recommender still has important limits. It only works on a tiny hand-writte
 Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
+[**Profile Comparison Reflection**](reflection.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+Building `NextPlay` showed me that recommendation systems do not need huge models to feel convincing. Even a simple weighted score can produce results that look thoughtful when the features and weights line up well with the user's taste. At the same time, the edge-case profile made it obvious that the system is only as good as the data and rules behind it.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+The biggest lesson about bias was how easy it is for hand-picked weights to shape the outcome. A small bonus for genre or acousticness can quietly dominate the ranking when the dataset is small. That means fairness problems do not only come from massive AI systems. They can also appear in tiny classroom systems whenever the data is narrow or the scoring logic reflects only one idea of what a "good" match looks like.
