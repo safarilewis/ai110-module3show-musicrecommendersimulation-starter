@@ -8,7 +8,11 @@
 
 ## 2. Intended Use
 
-This recommender is being developed for a small music company that wants to understand how platforms like Spotify and TikTok predict what to play next. The system suggests songs from a small catalog based on a user's preferred genre, mood, energy level, and whether they like acoustic music. Its main purpose is to simulate and explain the recommendation process in a simple, transparent way so the team can study how user preferences and song features turn into ranked suggestions. It is useful as an internal prototype and learning tool, but it is still too small and simplified for production use with real listeners.
+Goal / Task: `NextPlay` tries to suggest which songs a user is most likely to enjoy next based on a small taste profile and a small song catalog.
+
+Intended use: This recommender is being developed for a small music company that wants to understand how platforms like Spotify and TikTok predict what to play next. The system suggests songs from a small catalog based on a user's preferred genre, mood, energy level, and whether they like acoustic music. Its main purpose is to simulate and explain the recommendation process in a simple, transparent way so the team can study how user preferences and song features turn into ranked suggestions.
+
+Non-intended use: It should not be treated as a production recommendation engine, a measure of musical quality, or a fair system for real users. The dataset is too small, the profile is too simple, and the weights are hand-tuned for classroom exploration.
 
 ---
 
@@ -64,6 +68,8 @@ I also ran one weight-shift experiment: I cut the genre weight in half and doubl
 
 ## 9. Personal Reflection
 
-This project made me see how quickly a simple set of rules can start to feel like a real recommender. Even with only a few features, the top results often looked believable because the system was consistent about what it rewarded. At the same time, building it made me more aware that "smart" behavior can come from simple math plus a carefully chosen dataset, not necessarily from deep understanding.
+This project showed me that a recommendation system does not need to be very complicated to feel believable. Even with a small dataset and a simple weighted score, the results often felt reasonable because the system was consistent about what it rewarded. At the same time, building it made me realize how much of a recommender depends on the choices made by the developer.
 
-The most interesting part was seeing how much the hand-picked weights changed the story. When I doubled the energy weight and cut the genre weight, the recommender immediately started valuing cross-genre energy matches more. That reminded me that recommendation systems are not neutral. Human judgment still matters a lot because someone has to decide what counts as a "good" match in the first place.
+My biggest learning moment was seeing how much the weights could change the results. When I doubled the energy weight and lowered the genre weight, the rankings changed right away. AI tools helped me move faster when I was planning the system, writing the scoring logic, and organizing the write-up, but I still had to double-check the work. For example, the recommender code looked fine at first, but I still had to fix the package setup so `pytest` could run correctly.
+
+What surprised me most is that a simple scoring formula can still feel like a real recommendation engine when the output is easy to understand. If I extended this project, I would add more songs, use more features like valence in the scoring, and make the user profile more flexible so it could represent mixed tastes instead of just one clear preference.

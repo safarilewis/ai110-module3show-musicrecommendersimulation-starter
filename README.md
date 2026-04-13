@@ -170,6 +170,6 @@ Read and complete `model_card.md`:
 [**Model Card**](model_card.md)
 [**Profile Comparison Reflection**](reflection.md)
 
-Building `NextPlay` showed me that recommendation systems do not need huge models to feel convincing. Even a simple weighted score can produce results that look thoughtful when the features and weights line up well with the user's taste. At the same time, the edge-case profile made it obvious that the system is only as good as the data and rules behind it.
+Building `NextPlay` showed me that recommendation systems do not have to be very complex to feel convincing. A simple weighted score can still produce results that seem thoughtful when the features and weights line up with the user's taste. The edge-case profile also made it clear that the system is only as good as the data and rules behind it.
 
-The biggest lesson about bias was how easy it is for hand-picked weights to shape the outcome. A small bonus for genre or acousticness can quietly dominate the ranking when the dataset is small. That means fairness problems do not only come from massive AI systems. They can also appear in tiny classroom systems whenever the data is narrow or the scoring logic reflects only one idea of what a "good" match looks like.
+The biggest lesson for me was how easy it is for hand-picked weights to shape the final ranking. A small bonus for genre or acousticness can have a big effect when the dataset is small. That made me think more carefully about bias, because even a simple classroom recommender can end up reflecting the assumptions built into its data and scoring logic.
